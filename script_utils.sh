@@ -1,5 +1,12 @@
 #!/bin/bash
 
+###################################################################
+#Script Name    : shell script utility functions
+#Description	: Utility functions for shell scripting
+#Author       	: Ali Abbasi
+#Email         	: info@aliabbasi.net
+###################################################################
+
 # Color Codes
 # Colors used for output messages to enhance readability
 RED='\033[0;31m'        # Red color for error messages
