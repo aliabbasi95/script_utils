@@ -54,3 +54,24 @@ execute_command() {
         print_error "$message - Failed"
     fi
 }
+
+# Function to safely add text to a file, ensuring no duplicate lines
+# Usage: safe_append_to_file "text_to_add" "file_path"
+safe_append_to_file() {
+    local line="$1"
+    local file="$2"
+    local description="$3"
+
+    # Check if file exists, if not, create it
+    if [ ! -f "$file" ]; then
+        print_error "File $file does not exist. Creating it."
+        execute_command "sudo touch $file" "Creating $file"
+    fi
+
+    # Check if line already exists in the file
+    if grep -Fxq "$line" "$file"; then
+        print_status "Line already exists in $file. Skipping $description."
+    else
+        execute_command "echo \"$line\" | sudo tee -a $file > /dev/null" "$description"
+    fi
+}
